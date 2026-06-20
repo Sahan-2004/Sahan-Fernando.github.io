@@ -411,7 +411,7 @@ code{font-family:var(--mono);font-size:11px;background:var(--bg-raised-2);paddin
 <li><a href="#about">about</a></li>
 <li><a href="#skills">skills</a></li>
 <li><a href="#projects">projects</a></li>
-<li><a href="#ctf">ctf</a></li>
+<!-- <li><a href="#ctf">ctf</a></li> -->
 <li><a href="#writeups">write-ups</a></li>
 <li><a href="#certifications">certs</a></li>
 <li><a href="#roles">roles</a></li>
@@ -517,7 +517,7 @@ code{font-family:var(--mono);font-size:11px;background:var(--bg-raised-2);paddin
 
 <hr class="rule">
 
-<!-- ═══ CTF PROFILES ═══
+<!-- ═══ CTF PROFILES (commented out — uncomment when ready to publish) ═══
 <section id="ctf">
 <div class="wrap">
 <div class="section-head reveal">
@@ -526,76 +526,62 @@ code{font-family:var(--mono);font-size:11px;background:var(--bg-raised-2);paddin
 <p class="section-sub">Hands-on offensive security practice outside coursework — all in authorized lab environments.</p>
 </div>
 
-<div class="ctf-grid"> -->
+<div class="ctf-grid">
 
-<!-- TryHackMe — LIVE OFFICIAL BADGE -->
-<!-- <div class="reveal">
-  <a href="https://tryhackme.com/p/Zee25" target="_blank" rel="noopener" class="thm-badge-wrap">
-    <div class="thm-badge-header">
-      <span class="thm-platform-name">TryHackMe</span>
-      <span class="thm-live-pill">LIVE</span>
+  <div class="reveal">
+    <a href="https://tryhackme.com/p/Zee25" target="_blank" rel="noopener" class="thm-badge-wrap">
+      <div class="thm-badge-header">
+        <span class="thm-platform-name">TryHackMe</span>
+        <span class="thm-live-pill">LIVE</span>
+      </div>
+      <div class="thm-iframe-container">
+        <iframe
+          src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=Zee25"
+          style="border:none;width:100%;height:110px;display:block;background:#212C42;">
+        </iframe>
+      </div>
+      <div class="thm-badge-footer">
+        <span>tryhackme.com/p/Zee25</span>
+        <span>↗ view profile</span>
+      </div>
+    </a>
+  </div>
+
+  <a href="https://profile.hackthebox.com/profile/019e4187-201d-72b3-b9be-b80ab38fc50d"
+     target="_blank" rel="noopener" class="htb-card reveal">
+    <div class="htb-card-header">
+      <span class="htb-platform-name">HackTheBox</span>
+      <span class="htb-link-icon">↗</span>
     </div>
-    <div class="thm-iframe-container"> -->
-      <!--
-        REPLACE YOUR_THM_USER_ID with your numeric ID.
-        How to find it (30 seconds):
-          1. Open tryhackme.com in Chrome while logged in
-          2. Press F12 → Network tab → refresh page
-          3. In the filter box type: userPublicId
-          4. You'll see a request — copy the number after userPublicId=
-        Then replace: ?userPublicId=YOUR_THM_USER_ID
-      -->
-      <iframe
-        src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=Zee25"
-        style="border:none;width:100%;height:110px;display:block;background:#212C42;">
-      </iframe>
-    </div>
-    <div class="thm-badge-footer">
-      <span>tryhackme.com/p/Zee25</span>
-      <span>↗ view profile</span>
+    <div class="htb-card-body">
+      <div class="htb-stats">
+        <div class="htb-stat-block">
+          <span class="htb-stat-num placeholder">[ RANK ]</span>
+          <span class="htb-stat-label">Current Rank</span>
+        </div>
+        <div class="htb-stat-block">
+          <span class="htb-stat-num placeholder">[ # ]</span>
+          <span class="htb-stat-label">Machines Pwned</span>
+        </div>
+        <div class="htb-stat-block">
+          <span class="htb-stat-num placeholder">[ # ]</span>
+          <span class="htb-stat-label">Challenges Solved</span>
+        </div>
+        <div class="htb-stat-block">
+          <span class="htb-stat-num placeholder">[ # ]</span>
+          <span class="htb-stat-label">Points</span>
+        </div>
+      </div>
+      <div class="htb-note">Replace amber [ brackets ] with your real profile stats from hackthebox.com</div>
     </div>
   </a>
-  <!-- <div class="thm-id-notice"> -->
-    <!-- ⚠ <strong>Before publishing:</strong> replace <code>YOUR_THM_USER_ID</code> in the iframe src with your numeric ID.<br> -->
-    <!-- Find it: F12 → Network → refresh → filter <code>userPublicId</code> → copy the number. -->
-  <!-- </div> -->
+
 </div>
-
-<!-- HackTheBox — custom styled card -->
-<!-- <a href="https://profile.hackthebox.com/profile/019e4187-201d-72b3-b9be-b80ab38fc50d"
-   target="_blank" rel="noopener" class="htb-card reveal">
-  <div class="htb-card-header">
-    <span class="htb-platform-name">HackTheBox</span>
-    <span class="htb-link-icon">↗</span>
-  </div>
-  <div class="htb-card-body">
-    <div class="htb-stats">
-      <div class="htb-stat-block">
-        <span class="htb-stat-num placeholder">[ RANK ]</span>
-        <span class="htb-stat-label">Current Rank</span>
-      </div>
-      <div class="htb-stat-block">
-        <span class="htb-stat-num placeholder">[ # ]</span>
-        <span class="htb-stat-label">Machines Pwned</span>
-      </div>
-      <div class="htb-stat-block">
-        <span class="htb-stat-num placeholder">[ # ]</span>
-        <span class="htb-stat-label">Challenges Solved</span>
-      </div>
-      <div class="htb-stat-block">
-        <span class="htb-stat-num placeholder">[ # ]</span>
-        <span class="htb-stat-label">Points</span>
-      </div>
-    </div>
-    <div class="htb-note">Replace amber [ brackets ] with your real profile stats from hackthebox.com</div> -->
-  </div>
-</a>
-
-</div><!-- /ctf-grid -->
 </div>
 </section>
 
 <hr class="rule">
+═══ END CTF PROFILES ═══ -->
 
 <!-- ═══ WRITE-UPS ═══ -->
 <!-- <section id="writeups">
@@ -732,6 +718,16 @@ PLACEHOLDER CARDS — replace with your real write-ups as you complete them
 <div class="role-tags"><span>VLANs</span><span>IPSec VPN</span><span>Cisco ASA</span><span>ACLs</span><span>DHCP Snooping</span><span>DAI</span></div>
 <span class="role-label" style="margin-top:12px;">Relevant labs / projects</span>
 <div class="role-tags"><span>Secure Multi-Branch VPN</span><span>Enterprise Network Design</span></div>
+</div>
+
+<div class="role-card reveal">
+<div class="role-title">Cybersecurity Intern</div>
+<span class="role-label">Relevant skills</span>
+<div class="role-tags"><span>Nmap</span><span>Wireshark</span><span>Metasploit</span><span>Burp Suite</span><span>Vulnerability Assessment</span><span>Linux Admin</span><span>Firewall Config</span><span>Python</span></div>
+<span class="role-label" style="margin-top:12px;">Relevant labs / projects</span>
+<div class="role-tags"><span>THM: Jr Pen Tester Path</span><span>Firewall & Proxy Infra</span><span>Multi-Branch Network Security</span><span>AWS CI/CD Deployment</span></div>
+<span class="role-label" style="margin-top:12px;">What I bring</span>
+<div class="role-skills"><span>Hands-on lab experience across offensive & defensive disciplines, a strong academic foundation in ethical hacking, and the ability to hit the ground running from day one.</span></div>
 </div>
 
 <!-- <div class="role-card reveal">
