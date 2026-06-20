@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hiruth Samarasinghe — Cybersecurity & Network Security</title>
+<meta name="description" content="Portfolio of Hiruth Samarasinghe, Ethical Hacking & Network Security student. Network infrastructure, security hardening, and offensive security projects.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+    --bg:#0d1117;--bg-raised:#161b22;--bg-raised-2:#1c2230;
+    --border:#262e3a;--border-soft:#1d232e;
+    --text:#e6edf3;--text-dim:#8b949e;--text-faint:#5b6573;
+    --green:#3fb950;--green-dim:#2a8a3e;--amber:#f0883e;--red:#f85149;
+    --mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto;}*{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;}
+::selection{background:var(--green-dim);color:#fff;}
+a{color:inherit;}
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;z-index:0;}
+
+/* NAV */
+header{position:fixed;top:0;width:100%;background:rgba(13,17,23,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--border-soft);z-index:1000;}
+nav{max-width:1100px;margin:0 auto;padding:16px 24px;display:flex;justify-content:space-between;align-items:center;}
+.logo{font-family:var(--mono);font-weight:700;font-size:15px;color:var(--text);display:flex;align-items:center;gap:8px;}
+.logo .dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);}
+nav ul{display:flex;list-style:none;gap:28px;}
+nav ul li a{text-decoration:none;color:var(--text-dim);font-size:13px;font-family:var(--mono);transition:color .2s;}
+nav ul li a:hover{color:var(--green);}
+.nav-toggle{display:none;background:none;border:1px solid var(--border);color:var(--text);width:38px;height:38px;border-radius:6px;cursor:pointer;font-family:var(--mono);font-size:18px;}
+@media(max-width:820px){
+    nav ul{position:fixed;top:65px;left:0;right:0;background:var(--bg-raised);border-bottom:1px solid var(--border);flex-direction:column;gap:0;max-height:0;overflow:hidden;transition:max-height .3s ease;}
+    nav ul.open{max-height:380px;}
+    nav ul li{width:100%;border-bottom:1px solid var(--border-soft);}
+    nav ul li a{display:block;padding:16px 24px;}
+    .nav-toggle{display:block;}
+}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding:120px 0 60px;position:relative;z-index:1;}
+.eyebrow{font-family:var(--mono);color:var(--green);font-size:13px;letter-spacing:.05em;margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.eyebrow::before{content:'';width:18px;height:1px;background:var(--green);}
+.terminal{background:var(--bg-raised);border:1px solid var(--border);border-radius:10px;overflow:hidden;box-shadow:0 20px 60px -20px rgba(0,0,0,.6);max-width:760px;}
+.terminal-bar{background:var(--bg-raised-2);padding:10px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border);}
+.terminal-dot{width:11px;height:11px;border-radius:50%;}
+.terminal-dot.r{background:#f85149;}.terminal-dot.y{background:#f0883e;}.terminal-dot.g{background:#3fb950;}
+.terminal-title{font-family:var(--mono);font-size:12px;color:var(--text-faint);margin-left:8px;}
+.terminal-body{padding:24px 28px 30px;font-family:var(--mono);font-size:14.5px;min-height:280px;}
+.terminal-body .line{margin-bottom:6px;opacity:0;}
+.prompt-user{color:var(--green);}.prompt-path{color:#58a6ff;}.prompt-sym{color:var(--text-dim);}
+.out-key{color:var(--amber);}.out-val{color:var(--text);}.out-dim{color:var(--text-faint);}
+.cursor{display:inline-block;width:8px;height:16px;background:var(--green);vertical-align:middle;animation:blink 1s step-end infinite;}
+@keyframes blink{0%,50%{opacity:1;}50.01%,100%{opacity:0;}}
+@keyframes fadeIn{to{opacity:1;}}
+.hero-actions{margin-top:28px;display:flex;gap:14px;flex-wrap:wrap;}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;text-decoration:none;border-radius:6px;font-weight:600;font-size:14px;font-family:var(--mono);transition:all .2s;border:1px solid transparent;}
+.btn-primary{background:var(--green);color:#0d1117;}.btn-primary:hover{background:#56d364;transform:translateY(-2px);}
+.btn-ghost{background:transparent;border:1px solid var(--border);color:var(--text);}.btn-ghost:hover{border-color:var(--text-dim);background:var(--bg-raised);}
+
+/* SECTIONS */
+section{padding:90px 0;position:relative;z-index:1;}
+.section-head{margin-bottom:48px;}
+.section-num{font-family:var(--mono);color:var(--text-faint);font-size:13px;margin-bottom:8px;display:block;}
+.section-title{font-family:var(--mono);font-size:28px;font-weight:700;color:var(--text);}
+.section-title .accent{color:var(--green);}
+.section-sub{color:var(--text-dim);margin-top:10px;max-width:600px;font-size:15px;}
+.rule{border:none;border-top:1px solid var(--border-soft);margin:0;}
+
+/* ABOUT */
+#about .about-body{display:grid;grid-template-columns:2fr 1fr;gap:48px;align-items:start;}
+#about p{color:var(--text-dim);font-size:15.5px;margin-bottom:16px;}
+#about strong{color:var(--text);font-weight:600;}
+.focus-list{background:var(--bg-raised);border:1px solid var(--border);border-radius:10px;padding:22px;}
+.focus-list h4{font-family:var(--mono);font-size:12px;color:var(--text-faint);text-transform:uppercase;letter-spacing:.05em;margin-bottom:14px;}
+.focus-list ul{list-style:none;}
+.focus-list li{font-size:14px;color:var(--text-dim);padding:8px 0;border-bottom:1px solid var(--border-soft);display:flex;align-items:center;gap:10px;}
+.focus-list li:last-child{border-bottom:none;}
+.focus-list li::before{content:'▸';color:var(--green);font-size:12px;}
+@media(max-width:760px){#about .about-body{grid-template-columns:1fr;}}
+
+/* SKILLS */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;}
+.skill-card{background:var(--bg-raised);border:1px solid var(--border);border-radius:10px;padding:22px;transition:border-color .2s,transform .2s;}
+.skill-card:hover{border-color:var(--green-dim);transform:translateY(-3px);}
+.skill-card .icon{font-family:var(--mono);color:var(--green);font-size:13px;margin-bottom:14px;display:block;}
+.skill-card h3{font-family:var(--mono);font-size:15px;color:var(--text);margin-bottom:14px;font-weight:600;}
+.skill-tags{display:flex;flex-wrap:wrap;gap:6px;}
+.skill-tags span{font-size:12px;font-family:var(--mono);color:var(--text-dim);background:var(--bg-raised-2);border:1px solid var(--border-soft);padding:4px 9px;border-radius:4px;}
+
+/* PROJECTS */
+.project-list{display:flex;flex-direction:column;gap:14px;}
+.project-row{background:var(--bg-raised);border:1px solid var(--border);border-radius:10px;padding:22px 24px;cursor:pointer;transition:border-color .2s,background .2s;display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;text-align:left;width:100%;color:inherit;font-family:inherit;}
+.project-row:hover,.project-row:focus-visible{border-color:var(--green-dim);background:var(--bg-raised-2);outline:none;}
+.project-row:focus-visible{box-shadow:0 0 0 2px var(--green-dim);}
+.project-status{font-family:var(--mono);font-size:11px;padding:4px 9px;border-radius:4px;white-space:nowrap;font-weight:600;}
+.status-lead{background:rgba(63,185,80,.12);color:var(--green);border:1px solid var(--green-dim);}
+.status-team{background:rgba(88,166,255,.12);color:#58a6ff;border:1px solid #2c5d8a;}
+.status-solo{background:rgba(240,136,62,.12);color:var(--amber);border:1px solid #8a5a2a;}
+.project-row-title{font-weight:600;font-size:16px;color:var(--text);margin-bottom:4px;}
+.project-row-meta{font-size:13px;color:var(--text-faint);font-family:var(--mono);}
+.project-arrow{font-family:var(--mono);color:var(--text-faint);font-size:18px;transition:transform .2s,color .2s;}
+.project-row:hover .project-arrow{transform:translateX(3px);color:var(--green);}
+@media(max-width:600px){.project-row{grid-template-columns:1fr;gap:10px;}.project-arrow{display:none;}}
+
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(5,7,10,.8);backdrop-filter:blur(4px);z-index:9999;align-items:center;justify-content:center;padding:24px;}
+.modal-overlay.active{display:flex;}
+.modal-box{background:var(--bg-raised);border:1px solid var(--border);border-radius:12px;max-width:680px;width:100%;max-height:85vh;overflow-y:auto;box-shadow:0 30px 80px -20px rgba(0,0,0,.7);}
+.modal-head{padding:22px 26px;border-bottom:1px solid var(--border-soft);display:flex;justify-content:space-between;align-items:flex-start;gap:16px;background:var(--bg-raised-2);position:sticky;top:0;}
+.modal-head h3{font-family:var(--mono);font-size:18px;color:var(--text);font-weight:700;margin-bottom:6px;}
+.modal-head .modal-tag{font-family:var(--mono);font-size:12px;color:var(--green);}
+.modal-close{background:none;border:1px solid var(--border);color:var(--text-dim);width:32px;height:32px;border-radius:6px;cursor:pointer;font-size:16px;flex-shrink:0;transition:all .2s;}
+.modal-close:hover{color:var(--text);border-color:var(--text-dim);}
+.modal-body{padding:24px 26px 30px;}
+.modal-body h4{font-family:var(--mono);font-size:12px;color:var(--text-faint);text-transform:uppercase;letter-spacing:.05em;margin:22px 0 10px;}
+.modal-body h4:first-child{margin-top:0;}
+.modal-body ul{list-style:none;}
+.modal-body li{font-size:14.5px;color:var(--text-dim);padding:6px 0;padding-left:20px;position:relative;}
+.modal-body li::before{content:'$';position:absolute;left:0;color:var(--green);font-family:var(--mono);}
+.modal-stack{display:flex;flex-wrap:wrap;gap:6px;}
+.modal-stack span{font-size:12px;font-family:var(--mono);color:var(--text);background:var(--bg-raised-2);border:1px solid var(--border);padding:4px 10px;border-radius:4px;}
+.modal-img{width:100%;border-radius:8px;margin-top:4px;border:1px solid var(--border);}
+
+/* =============================================
+   CTF SECTION — THM iframe + HTB custom card
+   ============================================= */
+.ctf-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:20px;
+    align-items:start;
+}
+
+/* THM live iframe wrapper — clickable, matches site theme */
+.thm-badge-wrap{
+    background:var(--bg-raised);
+    border:1px solid var(--border);
+    border-radius:12px;
+    overflow:hidden;
+    transition:border-color .2s, transform .2s;
+    cursor:pointer;
+    display:block;
+    text-decoration:none;
+}
+.thm-badge-wrap:hover{
+    border-color:var(--green-dim);
+    transform:translateY(-3px);
+}
+.thm-badge-header{
+    padding:14px 18px 10px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid var(--border-soft);
+    background:var(--bg-raised-2);
+}
+.thm-platform-name{
+    font-family:var(--mono);
+    font-weight:700;
+    font-size:15px;
+    color:var(--text);
+}
+.thm-live-pill{
+    font-family:var(--mono);
+    font-size:10px;
+    color:var(--green);
+    background:rgba(63,185,80,.1);
+    border:1px solid var(--green-dim);
+    padding:3px 8px;
+    border-radius:20px;
+    display:flex;
+    align-items:center;
+    gap:5px;
+}
+.thm-live-pill::before{
+    content:'';
+    width:6px;height:6px;
+    border-radius:50%;
+    background:var(--green);
+    animation:pulse 2s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+.thm-iframe-container{
+    padding:0;
+    /* THM badge is 380x100 approx — we let it be natural */
+    background:#212C42; /* THM's own dark background so seam is invisible */
+}
+.thm-iframe-container iframe{
+    display:block;
+    width:100%;
+    height:110px;
+    border:none;
+    /* scale down slightly so it doesn't get clipped */
+    transform-origin:top left;
+}
+.thm-badge-footer{
+    padding:10px 18px 14px;
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--text-faint);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+/* HTB custom card */
+.htb-card{
+    background:var(--bg-raised);
+    border:1px solid var(--border);
+    border-radius:12px;
+    overflow:hidden;
+    transition:border-color .2s,transform .2s;
+    text-decoration:none;
+    display:block;
+}
+.htb-card:hover{
+    border-color:#9fef00; /* HTB green */
+    transform:translateY(-3px);
+}
+.htb-card-header{
+    padding:14px 18px 12px;
+    background:var(--bg-raised-2);
+    border-bottom:1px solid var(--border-soft);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+.htb-platform-name{
+    font-family:var(--mono);
+    font-weight:700;
+    font-size:15px;
+    color:#9fef00; /* HTB signature green */
+}
+.htb-link-icon{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--text-faint);
+}
+.htb-card-body{
+    padding:20px 18px;
+}
+.htb-stats{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+    margin-bottom:16px;
+}
+.htb-stat-block{}
+.htb-stat-num{
+    font-family:var(--mono);
+    font-size:22px;
+    font-weight:700;
+    color:#9fef00;
+    display:block;
+}
+.htb-stat-num.placeholder{
+    font-size:13px;
+    color:var(--amber);
+    font-weight:600;
+}
+.htb-stat-label{
+    font-size:11px;
+    color:var(--text-faint);
+    font-family:var(--mono);
+    text-transform:uppercase;
+    letter-spacing:.03em;
+    margin-top:2px;
+    display:block;
+}
+.htb-note{
+    font-size:12px;
+    color:var(--text-faint);
+    font-family:var(--mono);
+    border-top:1px solid var(--border-soft);
+    padding-top:14px;
+    font-style:italic;
+}
+
+/* WRITE-UPS */
+.writeup-list{display:flex;flex-direction:column;gap:14px;}
+.writeup-card{
+    background:var(--bg-raised);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:22px 24px;
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:16px;
+    align-items:center;
+    transition:border-color .2s,background .2s;
+}
+.writeup-card:hover{border-color:var(--green-dim);background:var(--bg-raised-2);}
+.writeup-domain{
+    font-family:var(--mono);
+    font-size:11px;
+    padding:3px 8px;
+    border-radius:4px;
+    margin-bottom:8px;
+    display:inline-block;
+}
+.domain-red{background:rgba(248,81,73,.12);color:#f85149;border:1px solid #6a2020;}
+.domain-blue{background:rgba(88,166,255,.12);color:#58a6ff;border:1px solid #2c5d8a;}
+.domain-analysis{background:rgba(240,136,62,.12);color:var(--amber);border:1px solid #8a5a2a;}
+.writeup-title{font-weight:600;font-size:16px;color:var(--text);margin-bottom:4px;}
+.writeup-meta{font-size:13px;color:var(--text-faint);font-family:var(--mono);}
+.writeup-coming{
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--text-faint);
+    background:var(--bg-raised-2);
+    border:1px solid var(--border-soft);
+    padding:4px 10px;
+    border-radius:4px;
+    white-space:nowrap;
+}
+.writeup-link{
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--green);
+    text-decoration:none;
+    white-space:nowrap;
+}
+.writeup-link:hover{text-decoration:underline;}
+.writeup-empty-note{
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--text-faint);
+    background:var(--bg-raised);
+    border:1px solid var(--border-soft);
+    border-radius:8px;
+    padding:20px 22px;
+    margin-top:10px;
+    font-style:italic;
+}
+
+/* ROLE MAPPING */
+.role-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;}
+.role-card{
+    background:var(--bg-raised);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:20px;
+    transition:border-color .2s;
+}
+.role-card:hover{border-color:var(--green-dim);}
+.role-title{font-family:var(--mono);font-size:14px;font-weight:700;color:var(--green);margin-bottom:10px;}
+.role-skills{margin-bottom:12px;}
+.role-skills span{font-size:12px;font-family:var(--mono);color:var(--text-dim);}
+.role-label{font-family:var(--mono);font-size:11px;color:var(--text-faint);text-transform:uppercase;margin-bottom:6px;display:block;}
+.role-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px;}
+.role-tags span{font-size:11px;font-family:var(--mono);color:var(--text-dim);background:var(--bg-raised-2);border:1px solid var(--border-soft);padding:3px 7px;border-radius:4px;}
+
+/* CERTS */
+.cert-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;}
+.cert-card{background:var(--bg-raised);border:1px solid var(--border);border-radius:10px;padding:20px;cursor:pointer;transition:border-color .2s,transform .2s;}
+.cert-card:hover{border-color:var(--green-dim);transform:translateY(-3px);}
+.cert-card h3{font-family:var(--mono);font-size:14.5px;color:var(--text);margin-bottom:6px;font-weight:600;}
+.cert-card p{font-size:13px;color:var(--text-faint);}
+.cert-view{font-family:var(--mono);font-size:11px;color:var(--green);margin-top:12px;display:block;}
+
+/* EDUCATION */
+.edu-list{display:flex;flex-direction:column;}
+.edu-item{display:grid;grid-template-columns:140px 1fr;gap:24px;padding:20px 0;border-bottom:1px solid var(--border-soft);}
+.edu-item:last-child{border-bottom:none;}
+.edu-year{font-family:var(--mono);font-size:13px;color:var(--text-faint);}
+.edu-name{font-weight:600;font-size:15.5px;color:var(--text);margin-bottom:4px;}
+.edu-org{font-size:13.5px;color:var(--text-dim);}
+@media(max-width:600px){.edu-item{grid-template-columns:1fr;gap:6px;}}
+
+/* CONTACT */
+.contact-box{background:var(--bg-raised);border:1px solid var(--border);border-radius:12px;padding:48px;text-align:center;}
+.contact-box .eyebrow{justify-content:center;}
+.contact-box h2{font-family:var(--mono);font-size:26px;margin-bottom:14px;}
+.contact-box p{color:var(--text-dim);max-width:480px;margin:0 auto 28px;}
+.contact-links{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;}
+
+footer{text-align:center;padding:28px;color:var(--text-faint);font-size:13px;font-family:var(--mono);border-top:1px solid var(--border-soft);}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+/* THM USER ID NOTICE — shown inline next to badge */
+.thm-id-notice{
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--amber);
+    background:rgba(240,136,62,.08);
+    border:1px solid rgba(240,136,62,.2);
+    border-radius:6px;
+    padding:10px 14px;
+    margin-top:10px;
+    line-height:1.6;
+}
+.thm-id-notice strong{color:var(--amber);}
+code{font-family:var(--mono);font-size:11px;background:var(--bg-raised-2);padding:2px 5px;border-radius:3px;color:var(--text);}
+</style>
+</head>
+<body>
+
+<header>
+<nav>
+<div class="logo"><span class="dot"></span>hiruth@security:~$</div>
+<ul id="navList">
+<li><a href="#about">about</a></li>
+<li><a href="#skills">skills</a></li>
+<li><a href="#projects">projects</a></li>
+<li><a href="#ctf">ctf</a></li>
+<li><a href="#writeups">write-ups</a></li>
+<li><a href="#certifications">certs</a></li>
+<li><a href="#roles">roles</a></li>
+<li><a href="#contact">contact</a></li>
+</ul>
+<button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">≡</button>
+</nav>
+</header>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+<div class="wrap">
+<span class="eyebrow">CYBERSECURITY · NETWORK SECURITY · SRI LANKA</span>
+<div class="terminal">
+<div class="terminal-bar">
+<span class="terminal-dot r"></span><span class="terminal-dot y"></span><span class="terminal-dot g"></span>
+<span class="terminal-title">hiruth@kali: ~</span>
+</div>
+<div class="terminal-body" id="termBody"></div>
+</div>
+<div class="hero-actions">
+<a href="#projects" class="btn btn-primary">→ view projects</a>
+<a href="resume.pdf" class="btn btn-ghost" download>↓ download resume</a>
+</div>
+</div>
+</section>
+
+<!-- ═══ ABOUT ═══ -->
+<section id="about">
+<div class="wrap">
+<div class="section-head reveal">
+<span class="section-num">01</span>
+<h2 class="section-title">about<span class="accent">.</span>me</h2>
+</div>
+<div class="about-body">
+<div class="reveal">
+<p>I started getting into cybersecurity because I wanted to understand how things break — not just how to build them. Growing up with a curiosity about how networks actually work under the hood, I found myself taking apart configurations just to see what would happen. That curiosity turned into a degree.</p>
+<p>I'm currently reading for a <strong>BSc (Hons) in Ethical Hacking & Network Security</strong> awarded by Coventry University (UK) in partnership with NIBM Sri Lanka, building on a Higher National Diploma and Diploma in Network Engineering. My work sits at the intersection of building and breaking: I design enterprise infrastructure — VLAN segmentation, high-availability topologies, site-to-site VPNs — then approach the same systems from an attacker's perspective.</p>
+<p>I'm pursuing a career in <strong>offensive security and penetration testing</strong>, using platforms like TryHackMe and HackTheBox to sharpen practical skills outside coursework. All hands-on offensive practice happens in authorized lab environments only — never on systems I don't own or have explicit permission to test.</p>
+</div>
+<div class="focus-list reveal">
+<h4>Currently focused on</h4>
+<ul>
+<li>Ethical Hacking Methodology</li>
+<li>Vulnerability Assessment</li>
+<li>Secure Network Architecture</li>
+<li>TryHackMe / HackTheBox Labs</li>
+<li>Cloud Infrastructure (AWS)</li>
+<li>CTF Challenges</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+
+<hr class="rule">
+
+<!-- ═══ SKILLS ═══ -->
+<section id="skills">
+<div class="wrap">
+<div class="section-head reveal">
+<span class="section-num">02</span>
+<h2 class="section-title">skills<span class="accent">.</span>stack</h2>
+</div>
+<div class="skills-grid">
+<div class="skill-card reveal">
+<span class="icon">[ NET ]</span>
+<h3>Networking & Infrastructure</h3>
+<div class="skill-tags"><span>Network Design</span><span>Subnetting</span><span>VLANs</span><span>DHCP</span><span>DNS</span><span>ACL</span><span>NAT</span><span>EIGRP</span><span>EtherChannel</span><span>STP</span></div>
+</div>
+<div class="skill-card reveal">
+<span class="icon">[ SEC ]</span>
+<h3>Offensive & Defensive Security</h3>
+<div class="skill-tags"><span>Nmap</span><span>Wireshark</span><span>Metasploit</span><span>Burp Suite</span><span>Vulnerability Assessment</span><span>Firewall Config</span><span>IPSec VPN</span><span>DHCP Snooping</span><span>DAI</span></div>
+</div>
+<div class="skill-card reveal">
+<span class="icon">[ OS ]</span>
+<h3>Operating Systems</h3>
+<div class="skill-tags"><span>Kali Linux</span><span>Ubuntu</span><span>CentOS</span><span>Windows Server 2019</span><span>Windows Server 2022</span></div>
+</div>
+<div class="skill-card reveal">
+<span class="icon">[ DEV ]</span>
+<h3>Tools & Platforms</h3>
+<div class="skill-tags"><span>VirtualBox</span><span>VMware</span><span>Python</span><span>VS Code</span><span>GitHub</span><span>AWS EC2</span><span>Nginx</span><span>GitHub Actions</span></div>
+</div>
+</div>
+</div>
+</section>
+
+<hr class="rule">
+
+<!-- ═══ PROJECTS ═══ -->
+<section id="projects">
+<div class="wrap">
+<div class="section-head reveal">
+<span class="section-num">03</span>
+<h2 class="section-title">projects<span class="accent">.</span>log</h2>
+<p class="section-sub">Click any entry to expand the full breakdown — scope, what was configured, and the stack used.</p>
+</div>
+<div class="project-list" id="projectList"></div>
+</div>
+</section>
+
+<hr class="rule">
+
+<!-- ═══ CTF PROFILES ═══
+<section id="ctf">
+<div class="wrap">
+<div class="section-head reveal">
+<span class="section-num">04</span>
+<h2 class="section-title">ctf<span class="accent">.</span>profile</h2>
+<p class="section-sub">Hands-on offensive security practice outside coursework — all in authorized lab environments.</p>
+</div>
+
+<div class="ctf-grid"> -->
+
+<!-- TryHackMe — LIVE OFFICIAL BADGE -->
+<!-- <div class="reveal">
+  <a href="https://tryhackme.com/p/Zee25" target="_blank" rel="noopener" class="thm-badge-wrap">
+    <div class="thm-badge-header">
+      <span class="thm-platform-name">TryHackMe</span>
+      <span class="thm-live-pill">LIVE</span>
+    </div>
+    <div class="thm-iframe-container"> -->
+      <!--
+        REPLACE YOUR_THM_USER_ID with your numeric ID.
+        How to find it (30 seconds):
+          1. Open tryhackme.com in Chrome while logged in
+          2. Press F12 → Network tab → refresh page
+          3. In the filter box type: userPublicId
+          4. You'll see a request — copy the number after userPublicId=
+        Then replace: ?userPublicId=YOUR_THM_USER_ID
+      -->
+      <iframe
+        src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=Zee25"
+        style="border:none;width:100%;height:110px;display:block;background:#212C42;">
+      </iframe>
+    </div>
+    <div class="thm-badge-footer">
+      <span>tryhackme.com/p/Zee25</span>
+      <span>↗ view profile</span>
+    </div>
+  </a>
+  <!-- <div class="thm-id-notice"> -->
+    <!-- ⚠ <strong>Before publishing:</strong> replace <code>YOUR_THM_USER_ID</code> in the iframe src with your numeric ID.<br> -->
+    <!-- Find it: F12 → Network → refresh → filter <code>userPublicId</code> → copy the number. -->
+  <!-- </div> -->
+</div>
+
+<!-- HackTheBox — custom styled card -->
+<!-- <a href="https://profile.hackthebox.com/profile/019e4187-201d-72b3-b9be-b80ab38fc50d"
+   target="_blank" rel="noopener" class="htb-card reveal">
+  <div class="htb-card-header">
+    <span class="htb-platform-name">HackTheBox</span>
+    <span class="htb-link-icon">↗</span>
+  </div>
+  <div class="htb-card-body">
+    <div class="htb-stats">
+      <div class="htb-stat-block">
+        <span class="htb-stat-num placeholder">[ RANK ]</span>
+        <span class="htb-stat-label">Current Rank</span>
+      </div>
+      <div class="htb-stat-block">
+        <span class="htb-stat-num placeholder">[ # ]</span>
+        <span class="htb-stat-label">Machines Pwned</span>
+      </div>
+      <div class="htb-stat-block">
+        <span class="htb-stat-num placeholder">[ # ]</span>
+        <span class="htb-stat-label">Challenges Solved</span>
+      </div>
+      <div class="htb-stat-block">
+        <span class="htb-stat-num placeholder">[ # ]</span>
+        <span class="htb-stat-label">Points</span>
+      </div>
+    </div>
+    <div class="htb-note">Replace amber [ brackets ] with your real profile stats from hackthebox.com</div> -->
+  </div>
+</a>
+
+</div><!-- /ctf-grid -->
+</div>
+</section>
+
+<hr class="rule">
+
+<!-- ═══ WRITE-UPS ═══ -->
+<!-- <section id="writeups">
+<div class="wrap">
+<div class="section-head reveal">
+<span class="section-num">05</span>
+<h2 class="section-title">write<span class="accent">-</span>ups</h2>
+<p class="section-sub">Lab reports and case studies from TryHackMe rooms and CTF challenges. Each follows the same structure: problem → approach → findings → lessons learned.</p>
+</div>
+
+<div class="writeup-list" id="writeupList">
+
+PLACEHOLDER CARDS — replace with your real write-ups as you complete them
+<div class="writeup-card reveal">
+<div>
+  <span class="writeup-domain domain-red">RED · OFFENSIVE</span>
+  <div class="writeup-title">[ Write-up title, e.g. "Vulnversity — Privilege Escalation via SUID" ]</div>
+  <div class="writeup-meta">TryHackMe · [ Date ] · Nmap · Gobuster · SUID exploitation</div>
+</div>
+<span class="writeup-coming">coming soon</span>
+</div>
+
+<div class="writeup-card reveal">
+<div>
+  <span class="writeup-domain domain-blue">BLUE · DEFENSIVE</span>
+  <div class="writeup-title">[ Write-up title, e.g. "Blue Team Fundamentals — SIEM Log Analysis" ]</div>
+  <div class="writeup-meta">TryHackMe · [ Date ] · Wireshark · Log analysis</div>
+</div>
+<span class="writeup-coming">coming soon</span>
+</div>
+
+<div class="writeup-card reveal">
+<div>
+  <span class="writeup-domain domain-analysis">ANALYSIS · NETWORKING</span>
+  <div class="writeup-title">[ Write-up title, e.g. "Multi-Thread TCP Port Scanner — Build & Analysis" ]</div>
+  <div class="writeup-meta">Lab Project · Python · Socket programming · Threading</div>
+</div>
+<span class="writeup-coming">coming soon</span>
+</div>
+
+</div>
+
+<p class="writeup-empty-note reveal">
+  ✏ Write-ups are in progress. Each completed TryHackMe room or CTF challenge will become a short case study here — scope, methodology, findings, and what I'd do differently. Replace these placeholder cards with links to your GitHub write-up files or a blog platform like Medium or a GitHub Pages /writeups folder.
+</p>
+
+</div>
+</section>
+
+<hr class="rule"> -->
+
+<!-- ═══ EDUCATION ═══ -->
+<section id="education">
+<div class="wrap">
+<div class="section-head reveal">
+<span class="section-num">06</span>
+<h2 class="section-title">education<span class="accent">.</span>path</h2>
+</div>
+<div class="edu-list reveal">
+<div class="edu-item">
+<span class="edu-year">2026 – 2028</span>
+<div><div class="edu-name">BSc (Hons) Ethical Hacking & Network Security</div><div class="edu-org">Coventry University (UK) in partnership with NIBM (Sri Lanka)</div></div>
+</div>
+<div class="edu-item">
+<span class="edu-year">2025 – 2026</span>
+<div><div class="edu-name">Higher National Diploma in Network Engineering</div><div class="edu-org">National Institute of Business Management</div></div>
+</div>
+<div class="edu-item">
+<span class="edu-year">2024 – 2025</span>
+<div><div class="edu-name">Diploma in Network Engineering</div><div class="edu-org">National Institute of Business Management</div></div>
+</div>
+</div>
+</div>
+</section>
+
+<hr class="rule">
+
+<!-- ═══ CERTIFICATIONS ═══ -->
+<section id="certifications">
+<div class="wrap">
+<div class="section-head reveal">
+<span class="section-num">07</span>
+<h2 class="section-title">certifications<span class="accent">.</span>verified</h2>
+<p class="section-sub">Click a certificate to view the credential image.</p>
+</div>
+<div class="cert-grid">
+<div class="cert-card reveal" onclick="openCert('assets/ccna.jpg','CCNA: Introduction to Networks')">
+<h3>CCNA: Introduction to Networks</h3><p>Cisco Networking Academy</p><span class="cert-view">view credential →</span>
+</div>
+<div class="cert-card reveal" onclick="openCert('assets/cybersecurity.jpg','Introduction to Cybersecurity')">
+<h3>Introduction to Cybersecurity</h3><p>Cisco Networking Academy</p><span class="cert-view">view credential →</span>
+</div>
+<div class="cert-card reveal" onclick="openCert('assets/rh124.jpg','Red Hat System Administration I (RH124)')">
+<h3>Red Hat System Administration I</h3><p>Red Hat Academy — RH124, Ver. 9.3</p><span class="cert-view">view credential →</span>
+</div>
+<div class="cert-card reveal" onclick="openCert('assets/rh134.jpg','Red Hat System Administration II (RH134)')">
+<h3>Red Hat System Administration II</h3><p>Red Hat Academy — RH134, Ver. 9.3</p><span class="cert-view">view credential →</span>
+</div>
+</div>
+</div>
+</section>
+
+<hr class="rule">
+
+<!-- ═══ ROLE MAPPING ═══ -->
+<section id="roles">
+<div class="wrap">
+<div class="section-head reveal">
+<span class="section-num">08</span>
+<h2 class="section-title">role<span class="accent">.</span>fit</h2>
+<p class="section-sub">How my skills and labs map to the roles I'm targeting — so you can see exactly where I'd plug in from day one.</p>
+</div>
+<div class="role-grid">
+
+<div class="role-card reveal">
+<div class="role-title">Junior Penetration Tester</div>
+<span class="role-label">Relevant skills</span>
+<div class="role-tags"><span>Nmap</span><span>Metasploit</span><span>Burp Suite</span><span>Enumeration</span><span>Exploitation</span></div>
+<span class="role-label" style="margin-top:12px;">Relevant labs / projects</span>
+<div class="role-tags"><span>THM: Jr Pen Tester Path</span><span>HTB Machines</span><span>Multi-Branch Network Security</span></div>
+</div>
+
+<!-- <div class="role-card reveal">
+<div class="role-title">SOC Analyst (Tier 1)</div>
+<span class="role-label">Relevant skills</span>
+<div class="role-tags"><span>Wireshark</span><span>Log Analysis</span><span>Firewall Rules</span><span>Syslog</span><span>Incident Response</span></div>
+<span class="role-label" style="margin-top:12px;">Relevant labs / projects</span>
+<div class="role-tags"><span>THM: Blue Team Fundamentals</span><span>Enterprise Network Project</span><span>Firewall/Proxy Project</span></div>
+</div> -->
+
+<div class="role-card reveal">
+<div class="role-title">Network Security Engineer</div>
+<span class="role-label">Relevant skills</span>
+<div class="role-tags"><span>VLANs</span><span>IPSec VPN</span><span>Cisco ASA</span><span>ACLs</span><span>DHCP Snooping</span><span>DAI</span></div>
+<span class="role-label" style="margin-top:12px;">Relevant labs / projects</span>
+<div class="role-tags"><span>Secure Multi-Branch VPN</span><span>Enterprise Network Design</span></div>
+</div>
+
+<!-- <div class="role-card reveal">
+<div class="role-title">Cloud / Infrastructure Security</div>
+<span class="role-label">Relevant skills</span>
+<div class="role-tags"><span>AWS EC2</span><span>Nginx</span><span>GitHub Actions</span><span>Linux Admin</span><span>Red Hat RHEL</span></div>
+<span class="role-label" style="margin-top:12px;">Relevant labs / projects</span>
+<div class="role-tags"><span>AWS CI/CD Deployment</span><span>RH124 / RH134</span><span>Firewall & Proxy Infra</span></div>
+</div> -->
+
+</div>
+</div>
+</section>
+
+<hr class="rule">
+
+<!-- ═══ CONTACT ═══ -->
+<section id="contact">
+<div class="wrap">
+<div class="contact-box reveal">
+<span class="eyebrow">GET IN TOUCH</span>
+<h2>Open to internship & junior security roles</h2>
+<p>Reach out for collaboration, opportunities, or to talk networking and security. I reply to every message.</p>
+<div class="contact-links">
+<a href="mailto:gdhiruthlakruwan@gmail.com" class="btn btn-primary">✉ Email</a>
+<a href="https://github.com/Hiruth-Samarasinghe" target="_blank" rel="noopener" class="btn btn-ghost">GitHub</a>
+<a href="https://linkedin.com/in/Hiruth-Samarasinghe" target="_blank" rel="noopener" class="btn btn-ghost">LinkedIn</a>
+<a href="https://tryhackme.com/p/Zee25" target="_blank" rel="noopener" class="btn btn-ghost">TryHackMe</a>
+</div>
+</div>
+</div>
+</section>
+
+<footer>
+<div class="wrap">© 2026 Hiruth Samarasinghe — Bandaragama, Sri Lanka — built &amp; secured by hand</div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+<div class="modal-box">
+<div class="modal-head">
+<div><span class="modal-tag" id="modalTag"></span><h3 id="modalTitle"></h3></div>
+<button class="modal-close" onclick="closeModal()" aria-label="Close">✕</button>
+</div>
+<div class="modal-body" id="modalBody"></div>
+</div>
+</div>
+
+<script>
+/* ── PROJECT DATA ── */
+const projects = [
+{
+    title:"Enterprise Network Infrastructure Design & Implementation",
+    tag:"Diploma Final Project",status:"team",statusLabel:"Team · Commended",
+    summary:"Designed a highly-available enterprise network with full Layer 2/3 segmentation, redundant topology, and centralised Windows Server services.",
+    scope:["Configured Layer 2/3 architecture with VLAN segmentation across departments","Implemented routing, NAT, ACLs, SSH, EtherChannel, STP and EIGRP","Designed redundant topology with main + backup routers/switches for HA","Configured Windows Server: DHCP, DNS, Syslog, TFTP","Built secure network access policies using ACLs","Centralised device management & monitoring via Syslog integration","Produced Wi-Fi heat maps, floor layouts, server rack designs, port mappings"],
+    stack:["VLANs","EIGRP","EtherChannel","STP","Windows Server","Syslog","TFTP"],
+    note:"Commended by the project assessment panel for excellence in architecture design."
+},
+{
+    title:"Firewall, Proxy & Load Balancing Infrastructure",
+    tag:"System Administration Project",status:"solo",statusLabel:"Team Project",
+    summary:"Complete Linux-based security infrastructure — segmented networks, proxy filtering, traffic analytics, and load-balanced web servers.",
+    scope:["Segmented LAN, LAN2, and DMZ networks with custom firewall rules","Squid Proxy Server for centralised web access, caching, and monitoring","LightSquid reporting for proxy usage analytics and bandwidth tracking","SquidGuard web filtering with blacklist/whitelist policies","Weighted round-robin load balancing across Apache web servers — tested under traffic","Automated incremental backups via Rsync, scheduled with Cron"],
+    stack:["Squid Proxy","SquidGuard","LightSquid","Apache","Rsync","Cron"],
+    note:"Recognised by the evaluation panel for outstanding practical implementation. Full individual ownership — planning through delivery."
+},
+{
+    title:"Secure Multi-Branch Network Security Implementation",
+    tag:"Network Security Project",status:"lead",statusLabel:"Team Lead",
+    summary:"Site-to-site IPSec VPN between branch offices on Cisco ASA, hardened against common Layer 2 attack vectors.",
+    scope:["Site-to-site IPSec VPN tunnels between main and sub-branch offices (Cisco ASA)","Network segmentation + secure inter-office comms across departments","Hardening: secure console/VTY access, strong auth, disabled unused services","DHCP Snooping, Dynamic ARP Inspection (DAI), IP Source Guard","VLAN hopping prevention","Port security: MAC restrictions + unused port shutdown","Modelled realistic enterprise bandwidth across secure WAN links"],
+    stack:["Cisco ASA","IPSec VPN","DHCP Snooping","DAI","Port Security"],
+    note:"Served as project team lead — managed risk and resolved critical infrastructure bottlenecks. Highly rated for security hardening."
+},
+{
+    title:"AWS CI/CD Web Deployment",
+    tag:"Cloud Infrastructure Project",status:"solo",statusLabel:"Team Project",
+    summary:"Linux web server on AWS EC2 with automated CI/CD via GitHub Actions.",
+    scope:["Deployed and managed a Linux web server on AWS EC2","Configured Nginx as the production web server","Built automated deployment pipeline using GitHub Actions","Set up continuous integration / continuous delivery workflow"],
+    stack:["AWS EC2","Nginx","GitHub Actions","CI/CD"],note:""
+}
+];
+
+function buildProjectList(){
+    const list=document.getElementById('projectList');
+    const sc={lead:"status-lead",team:"status-team",solo:"status-solo"};
+    projects.forEach((p,i)=>{
+        const row=document.createElement('button');
+        row.className='project-row reveal';row.setAttribute('type','button');
+        row.innerHTML=`<span class="project-status ${sc[p.status]}">${p.statusLabel}</span><span><div class="project-row-title">${p.title}</div><div class="project-row-meta">${p.tag}</div></span><span class="project-arrow">→</span>`;
+        row.addEventListener('click',()=>openProject(i));
+        list.appendChild(row);
+    });
+}
+
+function openProject(i){
+    const p=projects[i];
+    document.getElementById('modalTag').textContent=p.tag;
+    document.getElementById('modalTitle').textContent=p.title;
+    const scopeHtml=p.scope.map(s=>`<li>${s}</li>`).join('');
+    const stackHtml=p.stack.map(s=>`<span>${s}</span>`).join('');
+    document.getElementById('modalBody').innerHTML=`
+        <h4>Summary</h4><p style="color:var(--text-dim);font-size:14.5px;">${p.summary}</p>
+        <h4>What was configured</h4><ul>${scopeHtml}</ul>
+        <h4>Stack</h4><div class="modal-stack">${stackHtml}</div>
+        ${p.note?`<h4>Outcome</h4><p style="color:var(--text-dim);font-size:14.5px;">${p.note}</p>`:''}`;
+    document.getElementById('modalOverlay').classList.add('active');
+    document.body.style.overflow='hidden';
+}
+
+function openCert(src,title){
+    document.getElementById('modalTag').textContent='CERTIFICATION';
+    document.getElementById('modalTitle').textContent=title;
+    document.getElementById('modalBody').innerHTML=`<img class="modal-img" src="${src}" alt="${title}" onerror="this.outerHTML='<p style=\\'color:var(--text-faint);font-family:var(--mono);font-size:13px;\\'>Image not found at ${src} — add it to your assets/ folder.</p>'">`;
+    document.getElementById('modalOverlay').classList.add('active');
+    document.body.style.overflow='hidden';
+}
+
+function closeModal(){
+    document.getElementById('modalOverlay').classList.remove('active');
+    document.body.style.overflow='';
+}
+document.getElementById('modalOverlay').addEventListener('click',e=>{if(e.target.id==='modalOverlay')closeModal();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+
+/* mobile nav */
+const navToggle=document.getElementById('navToggle');
+const navList=document.getElementById('navList');
+navToggle.addEventListener('click',()=>{const o=navList.classList.toggle('open');navToggle.setAttribute('aria-expanded',o);});
+navList.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{navList.classList.remove('open');navToggle.setAttribute('aria-expanded','false');}));
+
+/* terminal */
+const termLines=[
+    {html:'<span class="prompt-user">hiruth</span><span class="prompt-sym">@</span><span class="prompt-path">security</span><span class="prompt-sym">:~$</span> whoami'},
+    {html:'<span class="out-val">Hiruth Samarasinghe</span>'},
+    {html:'<span class="out-dim">Ethical Hacking &amp; Network Security student</span>'},
+    {html:'&nbsp;'},
+    {html:'<span class="prompt-user">hiruth</span><span class="prompt-sym">@</span><span class="prompt-path">security</span><span class="prompt-sym">:~$</span> cat focus.txt'},
+    {html:'<span class="out-key">degree</span> <span class="out-dim">::</span> <span class="out-val">BSc (Hons) Ethical Hacking &amp; Network Security</span>'},
+    {html:'<span class="out-key">target</span> <span class="out-dim">::</span> <span class="out-val">Penetration Testing / Offensive Security</span>'},
+    {html:'<span class="out-key">base</span> <span class="out-dim">::</span> <span class="out-val">Bandaragama, Sri Lanka</span>'},
+    {html:'&nbsp;'},
+    {html:'<span class="prompt-user">hiruth</span><span class="prompt-sym">@</span><span class="prompt-path">security</span><span class="prompt-sym">:~$</span> <span class="cursor"></span>'}
+];
+
+function typeTerminal(){
+    const body=document.getElementById('termBody');body.innerHTML='';
+    termLines.forEach((line,i)=>{
+        const div=document.createElement('div');
+        div.className='line';div.innerHTML=line.html;
+        div.style.animation='fadeIn 0.05s ease forwards';
+        div.style.animationDelay=`${i*0.28}s`;
+        body.appendChild(div);
+    });
+}
+
+/* scroll reveal */
+function initReveal(){
+    const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}});},{threshold:.1});
+    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+}
+
+buildProjectList();
+typeTerminal();
+window.addEventListener('load',initReveal);
+setTimeout(initReveal,50);
+</script>
+</body>
+</html>
